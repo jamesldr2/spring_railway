@@ -26,7 +26,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Throwable exception) {
-        return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+        logger.error("Unhandled exception", exception);
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        // return new ResponseEntity<>("An unexpected error occurred",
+        // HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
